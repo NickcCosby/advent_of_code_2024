@@ -13,11 +13,8 @@ fn parse_lists(file_name: &str) -> (Vec<i32>, Vec<i32>) {
         .unwrap()
         .lines()
         .map(|line| {
-            let mut out = line.split("   ");
-            (
-                out.next().unwrap().to_owned().parse::<i32>().unwrap(),
-                out.next().unwrap().to_owned().parse::<i32>().unwrap(),
-            )
+            let out = line.split_once("   ").unwrap();
+            (out.0.parse::<i32>().unwrap(), out.1.parse::<i32>().unwrap())
         })
         .unzip()
 }
