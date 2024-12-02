@@ -37,10 +37,7 @@ fn puzzle_2() {
     for item in second_list {
         first_list.entry(item).and_modify(|acc| *acc += item);
     }
-    let sum = first_list
-        .into_iter()
-        .map(|(key, value)| value)
-        .sum::<i32>();
+    let sum: i32 = first_list.values().sum();
 
     dbg!(sum);
 }
