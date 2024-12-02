@@ -20,7 +20,7 @@ fn parse_lists(file_name: &str) -> (Vec<i32>, Vec<i32>) {
 }
 
 fn puzzle_1() {
-    let (mut first_list, mut second_list) = parse_lists("aoc_12_01_1_input.txt");
+    let (mut first_list, mut second_list) = parse_lists("aoc_12_01_input.txt");
     first_list.sort();
     second_list.sort();
     let sum = first_list
@@ -32,7 +32,7 @@ fn puzzle_1() {
 }
 
 fn puzzle_2() {
-    let (first_list, second_list) = parse_lists("aoc_12_01_1_input.txt");
+    let (first_list, second_list) = parse_lists("aoc_12_01_input.txt");
     let mut first_list: HashMap<i32, i32> = first_list.into_iter().map(|item| (item, 0)).collect();
     for item in second_list {
         first_list.entry(item).and_modify(|acc| *acc += item);
