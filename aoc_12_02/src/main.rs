@@ -75,26 +75,29 @@ fn report_safe_with_dapener(report: &[i32]) -> bool {
     if problem_indices.is_empty() {
         return true;
     }
-    for problem_index in problem_indices {
+    if problem_indices.len() < 3 {
+        for problem_index in problem_indices {
+            let mut first_dapaned_report = report.to_vec();
+            first_dapaned_report.remove(problem_index);
+            if report_safe(&first_dapaned_report) {
+                return true;
+            }
+            let mut second_dapaned_report = report.to_vec();
+            second_dapaned_report.remove(problem_index + 1);
+            if report_safe(&second_dapaned_report) {
+                return true;
+            }
+        }
+    } else {
         let mut first_dapaned_report = report.to_vec();
-        first_dapaned_report.remove(problem_index);
-        if report_safe(&first_dapaned_report) {
+        first_dapaned_report.remove(0);
+        let first_report_safe = report_safe(&first_dapaned_report);
+        if first_report_safe {
             return true;
         }
         let mut second_dapaned_report = report.to_vec();
-        second_dapaned_report.remove(problem_index + 1);
-        if report_safe(&second_dapaned_report) {
-            return true;
-        }
-    }
-
-    let mut first_dapaned_report = report.to_vec();
-    first_dapaned_report.remove(0);
-    let first_report_safe = report_safe(&first_dapaned_report);
-    if first_report_safe {
-        return true;
-    }
-    let mut second_dapaned_report = report.to_vec();
-    second_dapaned_report.remove(1);
-    return report_safe(&second_dapaned_report);
+        second_dapaned_report.remove(1);
+        return report_safe(&second_dapaned_report);
+    };
+    false
 }
